@@ -1,0 +1,84 @@
+//uloha 14
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to print the grid (for debugging)
+void printGrid(const vector<string>& grid) {
+    for (const string& row : grid) {
+        cout << row << endl;
+    }
+}
+
+// Function to tilt the platform north
+void tiltNorth(vector<string>& grid) {
+    int rows = grid.size();
+    int cols = grid[0].size();
+
+    // Process each column separately
+    for (int col = 0; col < cols; ++col) {
+        int insertPos = 0; // Position to insert the next 'O'
+
+        // Traverse from top to bottom in each column
+        for (int row = 0; row < rows; ++row) {
+            if (grid[row][col] == 'O') {
+                grid[row][col] = '.';  // Remove the 'O' from current position
+                grid[insertPos][col] = 'O';  // Place the 'O' at the new position
+                insertPos++;  // Move to the next position for insertion
+            }
+        }
+    }
+}
+
+// Function to calculate the load on the north support beams
+int calculateLoad(const vector<string>& grid) {
+    int totalLoad = 0;
+    int rows = grid.size();
+    int cols = grid[0].size();
+
+    // Traverse the grid to calculate the load
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < cols; ++col) {
+            if (grid[row][col] == 'O') {
+                totalLoad += (rows - row);  // Load is based on distance from the south edge
+            }
+        }
+    }
+
+    return totalLoad;
+}
+
+int main() {
+    // Example input grid
+    vector<string> grid = {
+        "O....#....",
+        "O.OO#....#",
+        ".....##...",
+        "OO.#O....O",
+        ".O.....O#.",
+        "O.#..O.#.#",
+        "..O..#O..O",
+        ".......O..",
+        "#....###..",
+        "#OO..#...."
+    };
+
+    cout << "Initial grid:" << endl;
+    printGrid(grid);
+
+    // Tilt the platform north
+    tiltNorth(grid);
+
+    cout << "\nGrid after tilting north:" << endl;
+    printGrid(grid);
+
+    // Calculate the load on the north support beams
+    int totalLoad = calculateLoad(grid);
+
+    cout << "\nTotal load on the north support beams: " << totalLoad << endl;
+
+    return 0;
+}

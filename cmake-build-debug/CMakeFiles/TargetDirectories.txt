@@ -1,0 +1,3 @@
+/home/filip/Documents/acrios/cmake-build-debug/CMakeFiles/acrios.dir
+/home/filip/Documents/acrios/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/filip/Documents/acrios/cmake-build-debug/CMakeFiles/rebuild_cache.dir
